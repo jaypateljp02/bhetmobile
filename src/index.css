@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-poppins;
+    }
+}
+
+@layer components {
+    .brand-gradient {
+        background: linear-gradient(135deg, #FF4500 0%, #FF8C00 100%);
+    }
+
+    .text-brand {
+        color: #FF4500;
+    }
+}
