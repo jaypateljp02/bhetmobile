@@ -42,7 +42,7 @@ const ManageOffers = () => {
                 <div>
                     <h1 className="text-3xl font-bold" style={{ color: 'var(--color-text)' }}>Offers & Promotions</h1>
                     <p className="text-sm mt-1 opacity-60" style={{ color: 'var(--color-text)' }}>
-                        {offers.length} active offers
+                        {offers?.length || 0} active offers
                     </p>
                 </div>
                 <button
@@ -139,13 +139,13 @@ const ManageOffers = () => {
 
             {/* Offers Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {offers.length === 0 ? (
+                {(offers?.length || 0) === 0 ? (
                     <div className="col-span-full rounded-2xl shadow-sm border p-12 text-center opacity-60" style={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-border)', color: 'var(--color-text)' }}>
                         <Tag size={48} className="mx-auto mb-4 opacity-50" />
                         <p>No offers yet. Create your first promotional offer!</p>
                     </div>
                 ) : (
-                    offers.map((offer) => (
+                    (offers || []).map((offer) => (
                         <div
                             key={offer.id}
                             className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-6 text-white relative overflow-hidden"

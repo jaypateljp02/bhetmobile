@@ -1,5 +1,6 @@
 import React from 'react';
 import { Smartphone, Users, TrendingUp, Palette, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 
 const Dashboard = () => {
@@ -131,27 +132,27 @@ const Dashboard = () => {
             <div className="p-6 rounded-2xl shadow-sm border" style={{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-border)' }}>
                 <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--color-text)' }}>Quick Actions</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <a href="/admin/products" className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors">
+                    <Link to="/admin/products" className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors">
                         <Smartphone className="w-8 h-8 text-blue-600" />
                         <div>
                             <p className="font-medium text-gray-800">Manage Products</p>
                             <p className="text-xs text-gray-500">Add, edit or remove products</p>
                         </div>
-                    </a>
-                    <a href="/admin/offers" className="flex items-center gap-3 p-4 bg-green-50 rounded-xl hover:bg-green-100 transition-colors">
+                    </Link>
+                    <Link to="/admin/offers" className="flex items-center gap-3 p-4 bg-green-50 rounded-xl hover:bg-green-100 transition-colors">
                         <TrendingUp className="w-8 h-8 text-green-600" />
                         <div>
                             <p className="font-medium text-gray-800">Manage Offers</p>
                             <p className="text-xs text-gray-500">Create promotional banners</p>
                         </div>
-                    </a>
-                    <a href="/" target="_blank" className="flex items-center gap-3 p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
+                    </Link>
+                    <Link to="/" target="_blank" className="flex items-center gap-3 p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors">
                         <Users className="w-8 h-8 text-purple-600" />
                         <div>
                             <p className="font-medium text-gray-800">View Website</p>
                             <p className="text-xs text-gray-500">See your live site</p>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

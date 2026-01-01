@@ -74,7 +74,7 @@ const ManageProducts = () => {
                 <div>
                     <h1 className="text-3xl font-bold" style={{ color: 'var(--color-text)' }}>Products</h1>
                     <p className="text-sm mt-1 opacity-60" style={{ color: 'var(--color-text)' }}>
-                        {products.length} products • {products.filter(p => p.is_trending).length} trending
+                        {products?.length || 0} products • {products?.filter(p => p.is_trending)?.length || 0} trending
                     </p>
                 </div>
                 <button
