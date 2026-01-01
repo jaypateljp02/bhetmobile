@@ -25,8 +25,8 @@ A modern, responsive React application for **Bhet Mobile**, a leading mobile pho
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/jaypateljp02/bhetmobilepush.git
-    cd bhetmobilepush
+    git clone https://github.com/jaypateljp02/bhetmobile.git
+    cd bhetmobile
     ```
 
 2.  **Install dependencies:**

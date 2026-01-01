@@ -4,18 +4,98 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --color-primary: #3b82f6;
+    --color-secondary: #1e293b;
+    --color-accent: #60a5fa;
+    --color-background: #0f172a;
+    --color-text: #f8fafc;
+    --color-card: #1e293b;
+    --color-border: #334155;
+}
+
 @layer base {
     body {
         @apply font-poppins;
+        background-color: var(--color-background);
+        color: var(--color-text);
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 }
 
 @layer components {
     .brand-gradient {
-        background: linear-gradient(135deg, #FF4500 0%, #FF8C00 100%);
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
     }
 
     .text-brand {
-        color: #FF4500;
+        color: var(--color-primary);
+    }
+
+    .bg-theme-primary {
+        background-color: var(--color-primary);
+    }
+
+    .bg-theme-secondary {
+        background-color: var(--color-secondary);
+    }
+
+    .bg-theme-card {
+        background-color: var(--color-card);
+    }
+
+    .bg-theme-background {
+        background-color: var(--color-background);
+    }
+
+    .text-theme-primary {
+        color: var(--color-primary);
+    }
+
+    .text-theme-accent {
+        color: var(--color-accent);
+    }
+
+    .text-theme-text {
+        color: var(--color-text);
+    }
+
+    .border-theme {
+        border-color: var(--color-border);
+    }
+
+    .card-theme {
+        background-color: var(--color-card);
+        border: 1px solid var(--color-border);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: var(--color-primary);
+        color: white;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+    }
+}
+
+@layer utilities {
+    .animate-fade-in-down {
+        animation: fadeInDown 0.3s ease-out;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
