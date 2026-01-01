@@ -9,7 +9,8 @@ import {
     addOffer as addOfferToDb,
     deleteOffer as deleteOfferFromDb,
     getSiteSettings,
-    updateSiteSettings
+    updateSiteSettings,
+    supabase
 } from '../lib/supabase';
 
 const AppContext = createContext();
@@ -185,7 +186,7 @@ export const AppProvider = ({ children }) => {
     // State for BroadcastChannel
     const [channel, setChannel] = useState(null);
 
-    // Initialize BroadcastChannel
+    // Initialize BroadcastChannel & Supabase Realtime
     useEffect(() => {
         const bc = new BroadcastChannel('bhet_mobile_sync');
         setChannel(bc);
@@ -202,7 +203,54 @@ export const AppProvider = ({ children }) => {
             }
         };
 
-        return () => bc.close();
+        // Supabase Realtime Subscriptions
+        let settingsSub, productsSub, offersSub;
+
+        if (supabase) {
+            // 1. Subscribe to site_settings changes (Theme Sync)
+            settingsSub = supabase
+                .channel('public:site_settings')
+                .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' },
+                    payload => {
+                        if (payload.new && payload.new.theme_id) {
+                            const theme = getThemeById(payload.new.theme_id);
+                            if (theme) setCurrentTheme(theme);
+                        }
+                    }
+                )
+                .subscribe();
+
+            // 2. Subscribe to products changes
+            productsSub = supabase
+                .channel('public:products')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'products' },
+                    async () => {
+                        const data = await getProducts();
+                        setProducts(data);
+                    }
+                )
+                .subscribe();
+
+            // 3. Subscribe to offers changes
+            offersSub = supabase
+                .channel('public:offers')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'offers' },
+                    async () => {
+                        const data = await getOffers();
+                        setOffers(data);
+                    }
+                )
+                .subscribe();
+        }
+
+        return () => {
+            bc.close();
+            if (supabase) {
+                supabase.removeChannel(settingsSub);
+                supabase.removeChannel(productsSub);
+                supabase.removeChannel(offersSub);
+            }
+        };
     }, []);
 
     // Theme functions
